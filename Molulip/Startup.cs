@@ -22,6 +22,12 @@ namespace Molulip
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = "10.242.65.66:6379";
+                option.InstanceName = "master";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

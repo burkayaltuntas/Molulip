@@ -1,7 +1,7 @@
-﻿using Molulip.Extentions;
+﻿using Molulip.Import.Extentions;
 using System;
 
-namespace Molulip.Models
+namespace Molulip.Import.Models
 {
     public class Meal
     {
