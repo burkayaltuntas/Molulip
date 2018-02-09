@@ -1,6 +1,8 @@
 ﻿using Molulip.Import.Extentions;
 using Molulip.Import.Models;
+using Newtonsoft.Json;
 using OfficeOpenXml;
+using ServiceStack.Redis;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,11 +12,31 @@ namespace Molulip.Import
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World !!!");
-        }
+            
 
+
+            var manager = new RedisManagerPool("localhost:6379");
+            using (var client = manager.GetClient())
+            {
+
+
+                // SET KEY
+                var meals = GetMeals();
+                string serializedMeals = JsonConvert.SerializeObject(meals);
+                client.Set("meal", serializedMeals);
+
+
+                // GET FROM REDIS
+                //var mealValue = client.GetValue("meal");
+                //var list = JsonConvert.DeserializeObject<Meal>(mealValue);
+
+
+
+
+            }
+        }
         public static List<Meal> GetMeals()
         {
             var mealList = new List<Meal>();

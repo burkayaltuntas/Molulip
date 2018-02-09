@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="ServiceStack.Redis.Core" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
