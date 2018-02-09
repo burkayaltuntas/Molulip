@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Molulip.Extentions
+namespace Molulip.Import.Extentions
 {
     public static class EPPLusExtensions
     {
@@ -20,7 +20,7 @@ namespace Molulip.Extentions
             {
                 Property = p,
                 Column = p.GetCustomAttributes<Column>().First().ColumnIndex //safe because if where above
-        }).ToList();
+            }).ToList();
 
 
             var rows = worksheet.Cells
@@ -36,10 +36,10 @@ namespace Molulip.Extentions
                     var tnew = new T();
                     columns.ForEach(col =>
                     {
-                    //This is the real wrinkle to using reflection - Excel stores all numbers as double including int
-                    var val = worksheet.Cells[row, col.Column];
-                    //If it is numeric it is a double since that is how excel stores all numbers
-                    if (val.Value == null)
+                        //This is the real wrinkle to using reflection - Excel stores all numbers as double including int
+                        var val = worksheet.Cells[row, col.Column];
+                        //If it is numeric it is a double since that is how excel stores all numbers
+                        if (val.Value == null)
                         {
                             col.Property.SetValue(tnew, null);
                             return;
@@ -59,8 +59,8 @@ namespace Molulip.Extentions
                             col.Property.SetValue(tnew, val.GetValue<DateTime>());
                             return;
                         }
-                    //Its a string
-                    col.Property.SetValue(tnew, val.GetValue<string>());
+                        //Its a string
+                        col.Property.SetValue(tnew, val.GetValue<string>());
                     });
 
                     return tnew;
