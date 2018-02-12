@@ -15,25 +15,14 @@ namespace Molulip.Import
         public static void Main(string[] args)
         {
             
-
-
             var manager = new RedisManagerPool("localhost:6379");
             using (var client = manager.GetClient())
             {
-
 
                 // SET KEY
                 var meals = GetMeals();
                 string serializedMeals = JsonConvert.SerializeObject(meals);
                 client.Set("meal", serializedMeals);
-
-
-                // GET FROM REDIS
-                //var mealValue = client.GetValue("meal");
-                //var list = JsonConvert.DeserializeObject<Meal>(mealValue);
-
-
-
 
             }
         }
